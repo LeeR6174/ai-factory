@@ -24,17 +24,19 @@ jobs:
       - name: Install Gemini CLI
         run: npm install -g @google/gemini-cli
 
-      # ④ Ideas確認（デバッグ用）
+      # ④ デバッグ（Ideas確認）
       - name: Show Ideas
         run: |
-          echo "===== Ideas files ====="
-          ls -R Ideas || echo "Ideas folder not found"
+          echo "===== Ideas ====="
+          ls -R Ideas || echo "No Ideas folder"
 
           echo "===== Content ====="
-          cat Ideas/*.md || echo "No markdown files found"
+          cat Ideas/*.md || echo "No markdown files"
 
-      # ⑤ AI実行（本体処理）
-      - name: Generate Requirements
+      # ⑤ AI実行（Secrets利用）
+      - name: Generate Requirements with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           mkdir -p Requirements
 
@@ -42,39 +44,38 @@ jobs:
             echo "Processing: $file"
 
             gemini -p "
-              あなたはプロダクト設計AIです。
+あなたはプロダクト設計AIです。
 
-              以下のアイデアをもとに、実装可能なRequirementsを作成してください。
+以下のアイデアをもとに、実装可能なRequirementsを作成してください。
 
-              # ルール
-              - MVP優先
-              - 無駄な機能は禁止
-              - 開発できるレベルまで分解
-              - Markdown形式で出力
+# ルール
+- MVP優先
+- 無駄な機能は禁止
+- 実装可能レベルまで分解
+- Markdown形式で出力
 
-              # アイデア
-              $(cat $file)
-            " > Requirements/$(basename "$file")
+# アイデア
+$(cat $file)
+" > Requirements/$(basename "$file")
 
             echo "Generated: Requirements/$(basename "$file")"
           done
 
-      # ⑥ 出力確認（超重要）
+      # ⑥ 出力確認
       - name: Show Requirements
         run: |
-          echo "===== Generated Requirements ====="
-          ls -R Requirements || echo "No requirements generated"
+          echo "===== Requirements ====="
+          ls -R Requirements || echo "No output"
+          cat Requirements/*.md || echo "Empty output"
 
-          cat Requirements/*.md || echo "No output files"
-
-      # ⑦ Git commit & push
-      - name: Commit and Push changes
+      # ⑦ commit & push
+      - name: Commit and Push
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
           git add Requirements/
 
-          git commit -m "auto: generate requirements from ideas" || echo "No changes to commit"
+          git commit -m "auto: generate requirements from ideas" || echo "no changes"
 
           git push
