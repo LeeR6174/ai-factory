@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ideas/水飲みリマインダー.md",
+                "file": "Ideas/水飲みリマインダーV2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "水飲みリマインダー"
+              "title": "水飲みリマインダーV2"
             }
           }
         ],
@@ -165,7 +165,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ideas/水飲みリマインダー.md",
+                "file": "Ideas/水飲みリマインダーV2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -175,7 +175,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "水飲みリマインダーへのバックリンク"
+              "title": "水飲みリマインダーV2へのバックリンク"
             }
           },
           {
@@ -184,12 +184,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ideas/水飲みリマインダー.md",
+                "file": "Ideas/水飲みリマインダーV2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "水飲みリマインダーからのアウトゴーイングリンク"
+              "title": "水飲みリマインダーV2からのアウトゴーイングリンク"
             }
           },
           {
@@ -213,13 +213,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ideas/水飲みリマインダー.md",
+                "file": "Ideas/水飲みリマインダーV2.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "水飲みリマインダーのアウトライン"
+              "title": "水飲みリマインダーV2のアウトライン"
             }
           }
         ]
@@ -244,7 +244,7 @@
     "Requirements/hamster-weight.md",
     "Requirements/powernap.md",
     "Requirements/template.md",
-    "Ideas/水飲みリマインダー.md",
+    "Ideas/水飲みリマインダーV2.md",
     "Projects/powernap/node_modules/yocto-queue/readme.md",
     "Projects/powernap/node_modules/yocto-queue/package.json",
     "Projects/powernap/node_modules/yocto-queue/index.js",
