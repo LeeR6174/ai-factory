@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ideas/water-reminder v1.md",
+                "file": "Ideas/water-reminder v3.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "water-reminder v1"
+              "title": "water-reminder v3"
             }
           }
         ],
@@ -165,7 +165,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ideas/water-reminder v1.md",
+                "file": "Ideas/water-reminder v3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -175,7 +175,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "water-reminder v1へのバックリンク"
+              "title": "water-reminder v3へのバックリンク"
             }
           },
           {
@@ -184,12 +184,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ideas/water-reminder v1.md",
+                "file": "Ideas/water-reminder v3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "water-reminder v1からのアウトゴーイングリンク"
+              "title": "water-reminder v3からのアウトゴーイングリンク"
             }
           },
           {
@@ -213,13 +213,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ideas/water-reminder v1.md",
+                "file": "Ideas/water-reminder v3.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "water-reminder v1のアウトライン"
+              "title": "water-reminder v3のアウトライン"
             }
           }
         ]
@@ -245,7 +245,7 @@
     "Requirements/test-requirements.md",
     "Requirements/powernap.md",
     "Requirements/hamster-weight.md",
-    "Ideas/water-reminder v1.md",
+    "Ideas/water-reminder v3.md",
     "Ideas/test0607.md",
     "Ideas/test.md",
     "無題のフォルダ",
