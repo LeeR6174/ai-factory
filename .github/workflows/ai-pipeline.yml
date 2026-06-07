@@ -44,19 +44,19 @@ jobs:
             echo "Processing: $file"
 
             gemini -p "
-あなたはプロダクト設計AIです。
+              あなたはプロダクト設計AIです。
 
-以下のアイデアをもとに、実装可能なRequirementsを作成してください。
+              以下のアイデアをもとに、実装可能なRequirementsを作成してください。
 
-# ルール
-- MVP優先
-- 無駄な機能は禁止
-- 実装可能レベルまで分解
-- Markdown形式で出力
+              # ルール
+              - MVP優先
+              - 無駄な機能は禁止
+              - 実装可能レベルまで分解
+              - Markdown形式で出力
 
-# アイデア
-$(cat $file)
-" > Requirements/$(basename "$file")
+              # アイデア
+              $(cat $file)
+            " > Requirements/$(basename "$file")
 
             echo "Generated: Requirements/$(basename "$file")"
           done
