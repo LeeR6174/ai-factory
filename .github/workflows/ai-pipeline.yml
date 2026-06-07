@@ -1,0 +1,46 @@
+name: AI Pipeline
+
+on:
+  push:
+    paths:
+      - "Ideas/**/*.md"
+
+jobs:
+  generate-requirements:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Gemini CLI
+        run: npm install -g @google/gemini-cli
+
+      - name: Get changed files
+        id: changes
+        run: |
+          echo "FILES=$(git diff --name-only HEAD^ HEAD | grep Ideas || true)" >> $GITHUB_ENV
+
+      - name: Run Gemini
+        run: |
+          mkdir -p Requirements
+
+          for file in $FILES; do
+            echo "Processing $file"
+
+            gemini -p "次のアイデアを読み、Requirements形式で出力し、Requirementsフォルダに保存してください: $(cat $file)" > Requirements/$(basename $file)
+          done
+
+      - name: Commit & Push results
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+          git add Requirements/
+          git commit -m "auto: generate requirements" || exit 0
+          git push
