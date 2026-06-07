@@ -14,29 +14,29 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ② 変更ファイル取得（1ファイルのみ）
-      - name: Get changed file
-        id: changes
-        run: |
-          FILE=$(git diff --name-only HEAD^ HEAD | grep '^Ideas/' | head -n 1)
-
-          if [ -z "$FILE" ]; then
-            echo "No idea file found"
-            exit 0
-          fi
-
-          echo "FILE=$FILE" >> $GITHUB_ENV
-          echo "Changed file: $FILE"
-
-      # ③ Node.jsセットアップ（必要なら）
-      - name: Setup Node
+      # ② Nodeセットアップ（CLI用）
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # ④ Gemini CLIインストール
+      # ③ Gemini CLIインストール
       - name: Install Gemini CLI
         run: npm install -g @google/gemini-cli
+
+      # ④ Ideasから1ファイル取得（安全版）
+      - name: Select idea file
+        id: select
+        run: |
+          FILE=$(ls Ideas/*.md 2>/dev/null | head -n 1)
+
+          if [ -z "$FILE" ]; then
+            echo "No idea files found"
+            exit 0
+          fi
+
+          echo "FILE=$FILE" >> $GITHUB_ENV
+          echo "Selected file: $FILE"
 
       # ⑤ AIでRequirements生成
       - name: Generate Requirements
@@ -60,23 +60,24 @@ jobs:
           - Markdown形式で出力
 
           # アイデア
-          $(cat $FILE)
+          $(cat "$FILE")
           " > Requirements/$(basename "$FILE")
 
       # ⑥ 出力確認
       - name: Show output
         run: |
           echo "===== Requirements ====="
-          cat Requirements/*.md || echo "No output"
+          ls -R Requirements || true
+          cat Requirements/*.md || true
 
       # ⑦ commit & push
-      - name: Commit and Push
+      - name: Commit and push
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
           git add Requirements/
 
-          git commit -m "auto: generate requirement from $FILE" || echo "no changes"
+          git commit -m "auto: generate requirements from idea" || echo "no changes"
 
           git push
