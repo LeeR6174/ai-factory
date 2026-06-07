@@ -241,6 +241,7 @@
   },
   "active": "3934f15911332106",
   "lastOpenFiles": [
+    "Ideas/water-reminder.md",
     "Projects/powernap/node_modules/yocto-queue/readme.md",
     "Projects/powernap/node_modules/yocto-queue/package.json",
     "Projects/powernap/node_modules/yocto-queue/index.js",
@@ -276,7 +277,6 @@
     "Projects/powernap/node_modules/tinyglobby/README.md",
     "Projects/powernap/node_modules/strip-json-comments/readme.md",
     "Projects/powernap/node_modules/string.prototype.trimstart/README.md",
-    "Projects/powernap/node_modules/string.prototype.trimstart/CHANGELOG.md",
     "Projects/powernap/public/window.svg",
     "Projects/powernap/public/vercel.svg",
     "Projects/powernap/public/next.svg",
