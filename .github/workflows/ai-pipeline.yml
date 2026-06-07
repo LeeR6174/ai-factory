@@ -1,4 +1,4 @@
-name: AI Requirements Generator
+name: AI Requirements Generator (Gemini API)
 
 on:
   push:
@@ -10,74 +10,67 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ① リポジトリ取得
+      # ① checkout
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ② Nodeセットアップ（CLI用）
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      # ③ Gemini CLIインストール
-      - name: Install Gemini CLI
-        run: npm install -g @google/gemini-cli
-
-      # ④ Ideasから1ファイル取得（安全版）
-      - name: Select idea file
-        id: select
+      # ② 1つのアイデアファイル取得
+      - name: Get idea file
+        id: file
         run: |
           FILE=$(ls Ideas/*.md 2>/dev/null | head -n 1)
 
           if [ -z "$FILE" ]; then
-            echo "No idea files found"
+            echo "No idea file found"
             exit 0
           fi
 
           echo "FILE=$FILE" >> $GITHUB_ENV
-          echo "Selected file: $FILE"
+          echo "Using: $FILE"
 
-      # ⑤ AIでRequirements生成
-      - name: Generate Requirements
+      # ③ Requirements生成（Gemini API直叩き）
+      - name: Generate Requirements via Gemini API
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_CLI_TRUST_WORKSPACE: "true"
         run: |
           mkdir -p Requirements
 
           echo "Processing: $FILE"
 
-          gemini -p "
-          あなたはプロダクト設計AIです。
+          RESPONSE=$(curl -s "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}" \
+          -H "Content-Type: application/json" \
+          -X POST \
+          -d @- <<EOF
+          {
+            "contents": [
+              {
+                "parts": [
+                  {
+                    "text": "あなたはプロダクト設計AIです。\n\n以下のアイデアをもとに、実装可能なRequirementsを作成してください。\n\n# ルール\n- MVP優先\n- 無駄な機能は禁止\n- 実装可能レベルまで分解\n- Markdown形式で出力\n\n# アイデア\n$(cat $FILE)"
+                  }
+                ]
+              }
+            ]
+          }
+          EOF
+          )
 
-          以下のアイデアをもとに、実装可能なRequirementsを作成してください。
+          echo "$RESPONSE" | jq -r '.candidates[0].content.parts[0].text' > Requirements/$(basename "$FILE")
 
-          # ルール
-          - MVP優先
-          - 無駄な機能は禁止
-          - 実装可能レベルまで分解
-          - Markdown形式で出力
-
-          # アイデア
-          $(cat "$FILE")
-          " > Requirements/$(basename "$FILE")
-
-      # ⑥ 出力確認
-      - name: Show output
+      # ④ 出力確認
+      - name: Show result
         run: |
           echo "===== Requirements ====="
-          ls -R Requirements || true
           cat Requirements/*.md || true
 
-      # ⑦ commit & push
-      - name: Commit and push
+      # ⑤ commit & push
+      - name: Commit changes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
           git add Requirements/
 
-          git commit -m "auto: generate requirements from idea" || echo "no changes"
+          git commit -m "auto: generate requirements (Gemini API)" || echo "no changes"
 
           git push
