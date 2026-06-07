@@ -10,37 +10,71 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      # ① リポジトリ取得
+      - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ② Node.jsセットアップ
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      # ③ Gemini CLIインストール
       - name: Install Gemini CLI
         run: npm install -g @google/gemini-cli
 
-      - name: Get changed files
-        id: changes
+      # ④ Ideas確認（デバッグ用）
+      - name: Show Ideas
         run: |
-          echo "FILES=$(git diff --name-only HEAD^ HEAD | grep Ideas || true)" >> $GITHUB_ENV
+          echo "===== Ideas files ====="
+          ls -R Ideas || echo "Ideas folder not found"
 
-      - name: Run Gemini
+          echo "===== Content ====="
+          cat Ideas/*.md || echo "No markdown files found"
+
+      # ⑤ AI実行（本体処理）
+      - name: Generate Requirements
         run: |
           mkdir -p Requirements
 
-          for file in $FILES; do
-            echo "Processing $file"
+          for file in Ideas/*.md; do
+            echo "Processing: $file"
 
-            gemini -p "次のアイデアを読み、Requirements形式で出力し、Requirementsフォルダに保存してください: $(cat $file)" > Requirements/$(basename $file)
+            gemini -p "
+              あなたはプロダクト設計AIです。
+
+              以下のアイデアをもとに、実装可能なRequirementsを作成してください。
+
+              # ルール
+              - MVP優先
+              - 無駄な機能は禁止
+              - 開発できるレベルまで分解
+              - Markdown形式で出力
+
+              # アイデア
+              $(cat $file)
+            " > Requirements/$(basename "$file")
+
+            echo "Generated: Requirements/$(basename "$file")"
           done
 
-      - name: Commit & Push results
+      # ⑥ 出力確認（超重要）
+      - name: Show Requirements
+        run: |
+          echo "===== Generated Requirements ====="
+          ls -R Requirements || echo "No requirements generated"
+
+          cat Requirements/*.md || echo "No output files"
+
+      # ⑦ Git commit & push
+      - name: Commit and Push changes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
           git add Requirements/
-          git commit -m "auto: generate requirements" || exit 0
+
+          git commit -m "auto: generate requirements from ideas" || echo "No changes to commit"
+
           git push
