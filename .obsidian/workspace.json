@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ideas/water-reminder v3.md",
+                "file": "Requirements/hamster-weight.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "water-reminder v3"
+              "title": "hamster-weight"
             }
           }
         ],
@@ -165,7 +165,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ideas/water-reminder v3.md",
+                "file": "Requirements/hamster-weight.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -175,7 +175,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "water-reminder v3へのバックリンク"
+              "title": "hamster-weightへのバックリンク"
             }
           },
           {
@@ -184,12 +184,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ideas/water-reminder v3.md",
+                "file": "Requirements/hamster-weight.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "water-reminder v3からのアウトゴーイングリンク"
+              "title": "hamster-weightからのアウトゴーイングリンク"
             }
           },
           {
@@ -213,13 +213,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ideas/water-reminder v3.md",
+                "file": "Requirements/hamster-weight.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "water-reminder v3のアウトライン"
+              "title": "hamster-weightのアウトライン"
             }
           }
         ]
@@ -241,42 +241,42 @@
   },
   "active": "3934f15911332106",
   "lastOpenFiles": [
-    "Requirements/template.md",
-    "Requirements/test-requirements.md",
-    "Requirements/powernap.md",
-    "Requirements/hamster-weight.md",
-    "Ideas/water-reminder v3.md",
-    "Ideas/test0607.md",
-    "Ideas/test.md",
-    "無題のフォルダ",
-    "新しいフォルダー",
-    "Projects/powernap/node_modules/next/image-types/global.d.ts",
-    "Projects/powernap/node_modules/next/image-types",
-    "Projects/powernap/node_modules/next/script.d.ts",
-    "Projects/powernap/node_modules/next/link.d.ts",
-    "Projects/powernap/node_modules/next/headers.d.ts",
-    "Projects/powernap/node_modules/next/error.d.ts",
-    "Projects/powernap/node_modules/next/dynamic.d.ts",
-    "Projects/powernap/node_modules/next/document.d.ts",
-    "Projects/powernap/CLAUDE.md",
-    "Projects/powernap/AGENTS.md",
-    "Projects/powernap/node_modules/ansi-styles/readme.md",
-    "Projects/powernap/node_modules/yallist/README.md",
-    "Projects/powernap/node_modules/lru-cache/README.md",
-    "Projects/powernap/node_modules/browserslist/README.md",
-    "Projects/powernap/node_modules/strip-bom/readme.md",
-    "Projects/powernap/node_modules/natural-compare/README.md",
-    "Projects/powernap/node_modules/call-bind/README.md",
-    "Projects/powernap/node_modules/call-bind/CHANGELOG.md",
-    "Projects/powernap/node_modules/semver/README.md",
-    "Projects/powernap/node_modules/is-core-module/README.md",
-    "Projects/powernap/node_modules/is-core-module/CHANGELOG.md",
-    "Projects/powernap/node_modules/isarray/README.md",
-    "Projects/powernap/node_modules/es-shim-unscopables/README.md",
-    "Projects/powernap/node_modules/es-shim-unscopables/CHANGELOG.md",
-    "Projects/powernap/node_modules/is-regex/README.md",
-    "Projects/powernap/node_modules/is-regex/CHANGELOG.md",
-    "Projects/powernap/node_modules/is-string/README.md",
+    "Projects/powernap/node_modules/yocto-queue/readme.md",
+    "Projects/powernap/node_modules/yocto-queue/package.json",
+    "Projects/powernap/node_modules/yocto-queue/index.js",
+    "Projects/powernap/node_modules/yocto-queue/license",
+    "Projects/powernap/node_modules/yocto-queue/index.d.ts",
+    "Projects/powernap/node_modules/yocto-queue",
+    "Projects/powernap/node_modules/which-typed-array/README.md",
+    "Projects/powernap/node_modules/which-typed-array/CHANGELOG.md",
+    "Projects/powernap/node_modules/update-browserslist-db/utils.js",
+    "Projects/powernap/node_modules/update-browserslist-db/index.d.ts",
+    "Projects/powernap/node_modules/update-browserslist-db/README.md",
+    "Projects/powernap/node_modules/update-browserslist-db/package.json",
+    "Projects/powernap/node_modules/update-browserslist-db/LICENSE",
+    "Projects/powernap/node_modules/update-browserslist-db/index.js",
+    "Projects/powernap/node_modules/unbox-primitive/README.md",
+    "Projects/powernap/node_modules/unbox-primitive/CHANGELOG.md",
+    "Projects/powernap/node_modules/typed-array-length/README.md",
+    "Projects/powernap/node_modules/typed-array-length/CHANGELOG.md",
+    "Projects/powernap/node_modules/typed-array-byte-offset/README.md",
+    "Projects/powernap/node_modules/typed-array-byte-offset/CHANGELOG.md",
+    "Projects/powernap/node_modules/typed-array-byte-length/README.md",
+    "Projects/powernap/node_modules/typed-array-byte-length/CHANGELOG.md",
+    "Projects/powernap/node_modules/typed-array-buffer/README.md",
+    "Projects/powernap/node_modules/typed-array-buffer/CHANGELOG.md",
+    "Projects/powernap/node_modules/tsconfig-paths/node_modules/json5/README.md",
+    "Projects/powernap/node_modules/tsconfig-paths/node_modules/json5/LICENSE.md",
+    "Projects/powernap/node_modules/tsconfig-paths/README.md",
+    "Projects/powernap/node_modules/tsconfig-paths/CHANGELOG.md",
+    "Projects/powernap/node_modules/ts-api-utils/README.md",
+    "Projects/powernap/node_modules/ts-api-utils/LICENSE.md",
+    "Projects/powernap/node_modules/tinyglobby/node_modules/picomatch/README.md",
+    "Projects/powernap/node_modules/tinyglobby/node_modules/fdir/README.md",
+    "Projects/powernap/node_modules/tinyglobby/README.md",
+    "Projects/powernap/node_modules/strip-json-comments/readme.md",
+    "Projects/powernap/node_modules/string.prototype.trimstart/README.md",
+    "Projects/powernap/node_modules/string.prototype.trimstart/CHANGELOG.md",
     "Projects/powernap/public/window.svg",
     "Projects/powernap/public/vercel.svg",
     "Projects/powernap/public/next.svg",
