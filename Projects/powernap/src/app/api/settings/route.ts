@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { join } from 'path';
 import { promises as fs } from 'fs';
 
@@ -22,7 +23,18 @@ async function ensureDataDirectory() {
 
 export async function GET() {
   try {
-    await ensureDataDirectory();
+    // 1. Try reading from cookie first (user-specific, serverless compatible)
+    const cookieStore = await cookies();
+    const settingsCookie = cookieStore.get('powernap_settings');
+    if (settingsCookie?.value) {
+      try {
+        return NextResponse.json(JSON.parse(settingsCookie.value));
+      } catch {
+        // Fall through on parse error
+      }
+    }
+
+    // 2. Fall back to local file settings.json (mostly for local development)
     try {
       const data = await fs.readFile(SETTINGS_FILE, 'utf-8');
       const settings = JSON.parse(data);
@@ -42,7 +54,6 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    await ensureDataDirectory();
     const body = await request.json();
     
     // Validate or merge with default settings
@@ -55,7 +66,23 @@ export async function POST(request: Request) {
       volume: typeof body.volume === 'number' ? body.volume : DEFAULT_SETTINGS.volume,
     };
     
-    await fs.writeFile(SETTINGS_FILE, JSON.stringify(newSettings, null, 2), 'utf-8');
+    // 1. Set cookie (user-specific, works in read-only serverless like Netlify/Vercel)
+    const cookieStore = await cookies();
+    cookieStore.set('powernap_settings', JSON.stringify(newSettings), {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+      sameSite: 'strict',
+      secure: process.env.NODE_ENV === 'production',
+    });
+
+    // 2. Try writing to filesystem (will fail silently on Netlify, which is fine since cookie handles it)
+    try {
+      await ensureDataDirectory();
+      await fs.writeFile(SETTINGS_FILE, JSON.stringify(newSettings, null, 2), 'utf-8');
+    } catch {
+      // Ignore write errors in read-only environments
+    }
+
     return NextResponse.json({ success: true, settings: newSettings });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Unknown error';

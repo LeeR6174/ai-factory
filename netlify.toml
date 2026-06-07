@@ -1,0 +1,8 @@
+[build]
+  base = "Projects/powernap"
+  publish = ".next"
+  command = "npm run build"
+
+# Configure standard Next.js runtime settings
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
