@@ -1,4 +1,4 @@
-name: AI Pipeline
+name: AI Requirements Generator
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - "Ideas/**/*.md"
 
 jobs:
-  generate-requirements:
+  generate:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,60 +14,60 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ② Node.jsセットアップ
+      # ② 変更ファイル取得（1ファイルのみ）
+      - name: Get changed file
+        id: changes
+        run: |
+          FILE=$(git diff --name-only HEAD^ HEAD | grep '^Ideas/' | head -n 1)
+
+          if [ -z "$FILE" ]; then
+            echo "No idea file found"
+            exit 0
+          fi
+
+          echo "FILE=$FILE" >> $GITHUB_ENV
+          echo "Changed file: $FILE"
+
+      # ③ Node.jsセットアップ（必要なら）
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # ③ Gemini CLIインストール
+      # ④ Gemini CLIインストール
       - name: Install Gemini CLI
         run: npm install -g @google/gemini-cli
 
-      # ④ デバッグ（Ideas確認）
-      - name: Show Ideas
-        run: |
-          echo "===== Ideas ====="
-          ls -R Ideas || echo "No Ideas folder"
-
-          echo "===== Content ====="
-          cat Ideas/*.md || echo "No markdown files"
-
-      # ⑤ AI実行（Secrets利用）
-      - name: Generate Requirements with Gemini
+      # ⑤ AIでRequirements生成
+      - name: Generate Requirements
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_CLI_TRUST_WORKSPACE: "true"
         run: |
           mkdir -p Requirements
 
-          for file in Ideas/*.md; do
-            echo "Processing: $file"
+          echo "Processing: $FILE"
 
-            gemini -p "
-              あなたはプロダクト設計AIです。
+          gemini -p "
+          あなたはプロダクト設計AIです。
 
-              以下のアイデアをもとに、実装可能なRequirementsを作成してください。
+          以下のアイデアをもとに、実装可能なRequirementsを作成してください。
 
-              # ルール
-              - MVP優先
-              - 無駄な機能は禁止
-              - 実装可能レベルまで分解
-              - Markdown形式で出力
+          # ルール
+          - MVP優先
+          - 無駄な機能は禁止
+          - 実装可能レベルまで分解
+          - Markdown形式で出力
 
-              # アイデア
-              $(cat $file)
-            " > Requirements/$(basename "$file")
-
-            echo "Generated: Requirements/$(basename "$file")"
-          done
+          # アイデア
+          $(cat $FILE)
+          " > Requirements/$(basename "$FILE")
 
       # ⑥ 出力確認
-      - name: Show Requirements
+      - name: Show output
         run: |
           echo "===== Requirements ====="
-          ls -R Requirements || echo "No output"
-          cat Requirements/*.md || echo "Empty output"
+          cat Requirements/*.md || echo "No output"
 
       # ⑦ commit & push
       - name: Commit and Push
@@ -77,6 +77,6 @@ jobs:
 
           git add Requirements/
 
-          git commit -m "auto: generate requirements from ideas" || echo "no changes"
+          git commit -m "auto: generate requirement from $FILE" || echo "no changes"
 
           git push
