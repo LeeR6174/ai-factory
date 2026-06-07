@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Requirements/hamster-weight.md",
+                "file": "Ideas/水飲みリマインダー.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "hamster-weight"
+              "title": "水飲みリマインダー"
             }
           }
         ],
@@ -165,7 +165,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Requirements/hamster-weight.md",
+                "file": "Ideas/水飲みリマインダー.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -175,7 +175,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "hamster-weightへのバックリンク"
+              "title": "水飲みリマインダーへのバックリンク"
             }
           },
           {
@@ -184,12 +184,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Requirements/hamster-weight.md",
+                "file": "Ideas/水飲みリマインダー.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "hamster-weightからのアウトゴーイングリンク"
+              "title": "水飲みリマインダーからのアウトゴーイングリンク"
             }
           },
           {
@@ -213,13 +213,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Requirements/hamster-weight.md",
+                "file": "Ideas/水飲みリマインダー.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "hamster-weightのアウトライン"
+              "title": "水飲みリマインダーのアウトライン"
             }
           }
         ]
@@ -241,7 +241,10 @@
   },
   "active": "3934f15911332106",
   "lastOpenFiles": [
-    "Ideas/water-reminder.md",
+    "Requirements/hamster-weight.md",
+    "Requirements/powernap.md",
+    "Requirements/template.md",
+    "Ideas/水飲みリマインダー.md",
     "Projects/powernap/node_modules/yocto-queue/readme.md",
     "Projects/powernap/node_modules/yocto-queue/package.json",
     "Projects/powernap/node_modules/yocto-queue/index.js",
@@ -274,9 +277,6 @@
     "Projects/powernap/node_modules/ts-api-utils/LICENSE.md",
     "Projects/powernap/node_modules/tinyglobby/node_modules/picomatch/README.md",
     "Projects/powernap/node_modules/tinyglobby/node_modules/fdir/README.md",
-    "Projects/powernap/node_modules/tinyglobby/README.md",
-    "Projects/powernap/node_modules/strip-json-comments/readme.md",
-    "Projects/powernap/node_modules/string.prototype.trimstart/README.md",
     "Projects/powernap/public/window.svg",
     "Projects/powernap/public/vercel.svg",
     "Projects/powernap/public/next.svg",
